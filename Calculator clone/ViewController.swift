@@ -19,46 +19,22 @@ class ViewController: UIViewController {
     @IBOutlet weak var numberOnScreen: UILabel!
     
     var opeRator = ""
-    var firstNumber = ""
+    var firstNumber = "0"
     var secondNumber = ""
     var twoMinus = false
     var minusNumber = false
     
     private func updateLabel(){
         if secondNumber == "" {
-            if firstNumber == ""{
-                numberOnScreen.text = "0"
+                    numberOnScreen.text = firstNumber
             } else {
-                numberOnScreen.text = firstNumber
-            }
-        } else {
             numberOnScreen.text = secondNumber
         }
     }
     
-//    if secondNumber == "" {
-//        if firstNumber == ""{
-//            numberOnScreen.text = "0"
-//        } else {
-//            if minusNumber == true {
-//                numberOnScreen.text = "-" + firstNumber
-//                minusNumber = false
-//            } else{
-//                numberOnScreen.text = firstNumber
-//            }
-//        }
-//    } else {
-//        if minusNumber == true {
-//            numberOnScreen.text = "-" + secondNumber
-//            minusNumber = false
-//        } else {
-//            numberOnScreen.text = secondNumber
-//        }
-//    }
-    
     @IBAction func CancelButton(_ sender: UIButton) {
          opeRator = ""
-         firstNumber = ""
+         firstNumber = "0"
          secondNumber = ""
          updateLabel()
     }
@@ -71,25 +47,24 @@ class ViewController: UIViewController {
         } else {
             opeRator = (sender.titleLabel?.text)!
             updateLabel()
-            
             if secondNumber != "" {
                 switch(opeRator){
                 case "÷":
-                    numberOnScreen.text = String(Int(firstNumber)! / Int(secondNumber)!)
                     firstNumber = String(Int(firstNumber)! / Int(secondNumber)!)
                     secondNumber = ""
+                    updateLabel()
                 case "×":
-                    numberOnScreen.text = String(Int(firstNumber)! * Int(secondNumber)!)
                     firstNumber = String(Int(firstNumber)! * Int(secondNumber)!)
                     secondNumber = ""
+                    updateLabel()
                 case "-":
-                    numberOnScreen.text = String(Int(firstNumber)! - Int(secondNumber)!)
                     firstNumber = String(Int(firstNumber)! - Int(secondNumber)!)
                     secondNumber = ""
+                    updateLabel()
                 case "+":
-                    numberOnScreen.text = String(Int(firstNumber)! + Int(secondNumber)!)
                     firstNumber = String(Int(firstNumber)! + Int(secondNumber)!)
                     secondNumber = ""
+                    updateLabel()
                 default:break
                 }
             }
@@ -104,13 +79,10 @@ class ViewController: UIViewController {
     
     @IBAction func minusSign(_ sender: UIButton) {
         
-        
-        
         minusNumber = !minusNumber
-        print(minusNumber)
         isThereAMinus()
         
-        if numberOnScreen.text == "0" {
+        if firstNumber == "0" {
                     if twoMinus == false {
                         if minusNumber == true{
                             firstNumber = "-0"
@@ -119,32 +91,26 @@ class ViewController: UIViewController {
                     }
                 } else {
             if minusNumber == true{
-                print("n")
                 if secondNumber == ""{
                     firstNumber = "-" + firstNumber
                     updateLabel()
                     minusNumber = !minusNumber
-                    print("l")
                 } else{
                     secondNumber = "-" + secondNumber
                     updateLabel()
                     minusNumber = !minusNumber
                 }
             }
-            
-            print(twoMinus)
-            
+    
             if twoMinus == true{
                 if secondNumber == ""{
                     firstNumber.removeFirst(2)
                     updateLabel()
-                    print("A")
                     twoMinus = false
                     
                 } else{
                     secondNumber.removeFirst(2)
                     updateLabel()
-                    print("c")
                     twoMinus = false
                 }
             }
@@ -157,21 +123,21 @@ class ViewController: UIViewController {
             if secondNumber != "" {
                 switch(opeRator){
                 case "÷":
-                    numberOnScreen.text = String(Int(firstNumber)! / Int(secondNumber)!)
                     firstNumber = String(Int(firstNumber)! / Int(secondNumber)!)
                     secondNumber = ""
+                    updateLabel()
                 case "×":
-                    numberOnScreen.text = String(Int(firstNumber)! * Int(secondNumber)!)
                     firstNumber = String(Int(firstNumber)! * Int(secondNumber)!)
                     secondNumber = ""
+                    updateLabel()
                 case "-":
-                    numberOnScreen.text = String(Int(firstNumber)! - Int(secondNumber)!)
                     firstNumber = String(Int(firstNumber)! - Int(secondNumber)!)
                     secondNumber = ""
+                    updateLabel()
                 case "+":
-                    numberOnScreen.text = String(Int(firstNumber)! + Int(secondNumber)!)
                     firstNumber = String(Int(firstNumber)! + Int(secondNumber)!)
                     secondNumber = ""
+                    updateLabel()
                 default:break
                 }
             }
@@ -179,15 +145,22 @@ class ViewController: UIViewController {
     }
     
     @IBAction func pressANumber(_ sender: Any) {
-        
         if opeRator == ""{
-            firstNumber = String(firstNumber) + String((sender as! UIButton).tag)
-            updateLabel()
+            if firstNumber == "0"{
+                firstNumber = ""
+                firstNumber = String(firstNumber) + String((sender as! UIButton).tag)
+                updateLabel()
+                print("a")
+            }
+            else{
+                firstNumber = String(firstNumber) + String((sender as! UIButton).tag)
+                updateLabel()
+                print("a")
+            }
         } else{
             secondNumber = String(secondNumber) + String((sender as! UIButton).tag)
             updateLabel()
         }
-        //print(firstNumber)
     }
 }
 
