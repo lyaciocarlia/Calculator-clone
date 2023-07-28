@@ -22,7 +22,6 @@ class ViewController: UIViewController {
     var firstNumber = "0"
     var secondNumber = ""
     var twoMinus = false
-    var minusNumber = false
     
     private func updateLabel(){
         if secondNumber == "" {
@@ -74,30 +73,25 @@ class ViewController: UIViewController {
     
     @IBAction func minusSign(_ sender: UIButton) {
         
-        minusNumber = !minusNumber
         if numberOnScreen.text?.first == "-"{
                     twoMinus = !twoMinus
                 }
                 
         if firstNumber == "0" {
                 if twoMinus == false {
-                    if minusNumber == true{
                             firstNumber = "-0"
                             updateLabel()
-                        }
+                       
                     }
                 } else {
-            if minusNumber == true{
                 if secondNumber == ""{
                     firstNumber = "-" + firstNumber
                     updateLabel()
-                    minusNumber = !minusNumber
                 } else{
                     secondNumber = "-" + secondNumber
                     updateLabel()
-                    minusNumber = !minusNumber
                 }
-            }
+           // }
     
             if twoMinus == true{
                 if secondNumber == ""{
@@ -120,24 +114,48 @@ class ViewController: UIViewController {
        
     }
     
+    
+    @IBAction func pointNumber(_ sender: UIButton) {
+        if opeRator == ""{
+            if firstNumber == "0"{
+                firstNumber = String(firstNumber) + "."
+                updateLabel()
+            }
+            else{
+                if firstNumber == "-0"{
+                    firstNumber = "-"
+                    firstNumber = String(firstNumber) +  "."
+                    updateLabel()
+                } else{
+                    firstNumber = String(firstNumber) +  "."
+                    updateLabel()
+                }
+            }
+        } else{
+            secondNumber = String(secondNumber) +  "."
+            updateLabel()
+        }
+    }
+    
+    
     @IBAction func equalLogic(_ sender: UIButton) {
         if opeRator != "" {
             if secondNumber != "" {
                 switch(opeRator){
                 case "÷":
-                    firstNumber = String(Int(firstNumber)! / Int(secondNumber)!)
+                    firstNumber = String(Float(firstNumber)! / Float(secondNumber)!)
                     secondNumber = ""
                     updateLabel()
                 case "×":
-                    firstNumber = String(Int(firstNumber)! * Int(secondNumber)!)
+                    firstNumber = String(Float(firstNumber)! * Float(secondNumber)!)
                     secondNumber = ""
                     updateLabel()
                 case "-":
-                    firstNumber = String(Int(firstNumber)! - Int(secondNumber)!)
+                    firstNumber = String(Float(firstNumber)! - Float(secondNumber)!)
                     secondNumber = ""
                     updateLabel()
                 case "+":
-                    firstNumber = String(Int(firstNumber)! + Int(secondNumber)!)
+                    firstNumber = String(Float(firstNumber)! + Float(secondNumber)!)
                     secondNumber = ""
                     updateLabel()
                 default:break

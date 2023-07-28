@@ -314,10 +314,13 @@
                                                     <constraint firstAttribute="width" secondItem="Mqs-Uz-SpV" secondAttribute="height" multiplier="1:1" id="KsE-V1-Fgg"/>
                                                 </constraints>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="filled" title="," cornerStyle="capsule">
+                                                <buttonConfiguration key="configuration" style="filled" title="." cornerStyle="capsule">
                                                     <fontDescription key="titleFontDescription" type="system" pointSize="45"/>
                                                     <color key="baseBackgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="pointNumber:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wth-BL-XgZ"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wqH-gD-7PH">
                                                 <rect key="frame" x="291" y="0.0" width="91" height="91"/>
